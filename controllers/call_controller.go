@@ -43,6 +43,10 @@ func (cc *CallController) Show(c *gin.Context) {
 	c.File("view/call/show.html")
 }
 
+func (cc *CallController) ConfirmJoin(c *gin.Context) {
+	c.File("views/call/confirm_join.html")
+}
+
 func (cc *CallController) Join(c *gin.Context) {
 	roomId := c.PostForm("id")
 	if roomId == "" {
@@ -67,6 +71,10 @@ func (cc *CallController) Join(c *gin.Context) {
 
 	redirectURL := fmt.Sprintf("/call/%s?attendantId=%s", roomId, attendant.ID)
 	c.Redirect(http.StatusFound, redirectURL)
+}
+
+func (cc *CallController) ConfirmStart(c *gin.Context) {
+	c.File("views/call/confirm_start.html")
 }
 
 func (cc *CallController) Start(c *gin.Context) {
