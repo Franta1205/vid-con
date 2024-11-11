@@ -7,7 +7,7 @@ import (
 
 func SetRoutes(r *gin.Engine) {
 	homeController := controllers.InitHone()
-	r.GET("/", homeController.Home)
+	r.GET("/", homeController.Index)
 
 	videoController := controllers.InitVideo()
 	callGroup := r.Group("/call")
