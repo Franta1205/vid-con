@@ -40,7 +40,7 @@ func (cc *CallController) Show(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "you re not authorized to join this room"})
 	}
 	fmt.Println("this is attendant id", attendant.ID)
-	c.String(http.StatusOK, "call room id: "+roomId)
+	c.File("view/call/show.html")
 }
 
 func (cc *CallController) Join(c *gin.Context) {
