@@ -70,5 +70,14 @@ func (cc *CallController) Join(c *gin.Context) {
 }
 
 func (cc *CallController) Start(c *gin.Context) {
-	c.String(http.StatusOK, "start")
+	attendantName := c.PostForm("attendantName")
+	if attendantName == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "attendant name cannot be blank"})
+		return
+	}
+	room := entities.NewRoom()
+	attendant := entities.NewAttendant(attendantName)
+	room.AddAttendant(attendant)
+	redirectURL := fmt.Sprintf("/call/%s?attendantId=%s", room.ID, attendant.ID)
+	c.Redirect(http.StatusFound, redirectURL)
 }
