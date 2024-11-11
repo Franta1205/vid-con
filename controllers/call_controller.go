@@ -89,3 +89,7 @@ func (cc *CallController) Start(c *gin.Context) {
 	redirectURL := fmt.Sprintf("/call/%s?attendantId=%s", room.ID, attendant.ID)
 	c.Redirect(http.StatusFound, redirectURL)
 }
+
+func (cc *CallController) Leave(c *gin.Context) {
+	c.Redirect(http.StatusOK, "/")
+}

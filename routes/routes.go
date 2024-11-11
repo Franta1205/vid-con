@@ -17,5 +17,6 @@ func SetRoutes(r *gin.Engine) {
 		callGroup.GET("/confirm_start", videoController.ConfirmStart)
 		callGroup.POST("/join", videoController.Join)
 		callGroup.GET("/confirm_join", videoController.ConfirmJoin)
+		callGroup.POST("/leave", videoController.Leave)
 	}
 }
