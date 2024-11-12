@@ -19,8 +19,15 @@ func NewRoom() *Room {
 
 func (r *Room) AddAttendant(a *Attendant) {
 	fmt.Println("adding attendant: ", a)
+	r.Attendants[a.ID] = a
 }
 
 func (r *Room) RemoveAttendant(a *Attendant) {
 	fmt.Println("removing attendant", a)
+	if _, exist := r.Attendants[a.ID]; exist {
+		delete(r.Attendants, a.ID)
+		fmt.Println("attendant removed", a.Name)
+	} else {
+		fmt.Println("attendant not found")
+	}
 }
