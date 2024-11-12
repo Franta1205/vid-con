@@ -20,3 +20,7 @@ func NewRoom() *Room {
 func (r *Room) AddAttendant(a *Attendant) {
 	fmt.Println("adding attendant: ", a)
 }
+
+func (r *Room) RemoveAttendant(a *Attendant) {
+	fmt.Println("removing attendant", a)
+}

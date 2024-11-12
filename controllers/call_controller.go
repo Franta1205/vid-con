@@ -91,5 +91,24 @@ func (cc *CallController) Start(c *gin.Context) {
 }
 
 func (cc *CallController) Leave(c *gin.Context) {
+	roomID := c.Param("room_id")
+	attendantID := c.Param("attendant_id")
+
+	if roomID == "" || attendantID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "roomID or attendantID cannot be blank"})
+		return
+	}
+
+	room, exist := cc.rooms[roomID]
+	if !exist {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "room does not exist"})
+		return
+	}
+
+	attendant, exist := room.Attendants[attendantID]
+	if !exist {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "attendant does not exist"})
+	}
+	room.RemoveAttendant(attendant)
 	c.Redirect(http.StatusOK, "/")
 }
