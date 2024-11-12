@@ -84,6 +84,7 @@ func (cc *CallController) Start(c *gin.Context) {
 		return
 	}
 	room := entities.NewRoom()
+	cc.rooms[room.ID] = room
 	attendant := entities.NewAttendant(attendantName)
 	room.AddAttendant(attendant)
 	redirectURL := fmt.Sprintf("/call/%s?attendantId=%s", room.ID, attendant.ID)
