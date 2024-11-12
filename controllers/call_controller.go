@@ -110,5 +110,10 @@ func (cc *CallController) Leave(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "attendant does not exist"})
 	}
 	room.RemoveAttendant(attendant)
+
+	if len(room.Attendants) == 0 {
+		delete(cc.rooms, roomID)
+		fmt.Println("room deleted as no attendants remains")
+	}
 	c.Redirect(http.StatusOK, "/")
 }
